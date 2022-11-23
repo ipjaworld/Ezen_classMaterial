@@ -207,7 +207,28 @@ public class MemberList_Main {
 	
 	private static void delete() {
 		
+		MemberDao mdao = new MemberDao();
+		MemberDto mdto = new MemberDto();
+		Scanner sc = new Scanner(System.in);
 		
+		// 삭제할 회원번호를 입력 받아서 해당회원이 존재하는지 검사하고
+		String membernum;
+		while(true) {
+			System.out.print("삭제할 회원의 회원번호를 입력하세요");
+			membernum = sc.nextLine();
+			if( membernum.equals("") ) System.out.println("회원번호 입력은 필수 입니다");
+			else break;
+		}
+		// 있으면 mdto 에 저장
+		mdto = mdao.selectOne( Integer.parseInt( membernum ) /* 입력받은 회원 번호 */ );
+		if( mdto == null) {
+			System.out.println("해당 회원이 없습니다");
+			return;
+		}else {
+			int result = mdao.delete( Integer.parseInt( membernum ) );
+			if( result == 1 )System.out.println("삭제 성공");
+			else System.out.println("삭제 실패");
+		}
 		
 	}
 

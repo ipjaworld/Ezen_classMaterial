@@ -140,6 +140,23 @@ public class MemberDao {
 		close();
 		return result;
 	}
+	
+	
+	public int delete(int  membernum ) {
+		
+		int result = 0;
+		con = getConnection();
+		String sql = "delete from memberlist where membernum=?";
+		try {
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, membernum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {  e.printStackTrace();
+		}
+		close();
+		
+		return result;
+	}
 
 }
 

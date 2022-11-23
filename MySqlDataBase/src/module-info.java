@@ -6,4 +6,5 @@
  *
  */
 module MySqlDataBase {
+	requires java.sql;
 }

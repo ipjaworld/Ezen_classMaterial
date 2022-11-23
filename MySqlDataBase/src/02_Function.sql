@@ -53,5 +53,55 @@
 
 
 
+-- YEAR(날짜) - 날짜의 연도 출력.
+-- MONTH(날짜) - 날짜의 월 출력.
+-- MONTHNAME(날짜) - 날짜의 월을 영어로 출력
+-- DAYNAME(날짜) - 날짜의 요일을 영어로 출력
+-- DAYOFMONTH(날짜) - 날짜의 월별 일자 출력
+-- DAYOFWEEK(날짜) - 날짜의 주별 일자 출력(일요일(1), 월요일(2), ... 토요일(7) )
+-- WEEKDAY(날짜) - 날짜의 주별 일자 출력(월요일(0), 화요일(1), .... 일요일(6))
+-- DAYOFYEAR(날짜) - 일년을 기준으로 한 날짜까지의 날 수.
+-- WEEK(날짜) - 일년 중 몇번째 주.
+-- FROM_DAYS(날 수) --00년 00월 00일부터 날 수 만큼 경과한 날의 날짜 출력
+-- TO_DAYS(날짜) -- 00년 00월 00일부터 날짜까지의 일자 수 출력
+-- DATE_FORMAT(날짜, '형식') : 날짜를 형식에 맞게 출력
+
+
+-- 오라클의 data_format() 날짜 -> 지정형식으로
+date_format( now(), '%y%m%d')
+-- 오라클의 to_date() 문자 -> 날짜
+str_to_date('20211013', '%Y%m%d')
+
+select date_format( new(), '%Y%m%d' ) from dual;
+select str_to_date('20221123', '%Y%m%d') from dual;
+
+
+-- %a 	일(Sun ~ Sat)
+-- %b 	월(Jan ~ Dec)
+-- %c 	월(0 ~ 12)
+-- %D 	일(1st, 2nd, 3rd, ...)
+-- %d	일(01~31)
+-- %e 	일(0 ~ 31)
+-- %f Microseconds
+-- %H	시간 (00~23)
+-- %h	시간 (00~12)
+-- %I		시간 (00~12)
+-- %i		분(00 ~ 59)
+-- %j		Day of the year (001 to 366)
+-- %k		시간(0 ~ 23)
+-- %l		시간(1 ~ 12)
+-- %M	월(January ~ December)
+-- %m	월(00~12)
+-- %p	AM or PM
+-- %r 시간(12시)을 hh:mm:ss AM/PM 형식으로
+-- %S 	초(00~59)
+-- %s		초(00~59)
+-- %T	시간(24시)을 hh:mm:ss 형식으로
+
+
+
+
+
+
 
 
