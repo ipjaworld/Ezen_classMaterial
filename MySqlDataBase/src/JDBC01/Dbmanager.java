@@ -11,7 +11,7 @@ public class Dbmanager {
 	static String driver = "com.mysql.cj.jdbc.Driver";
 	static String url = "jdbc:mysql://localhost:3306/scott";
 	static String id = "root";
-	static String pw = "adminuser";
+	static String pw = "ipjaadmin";
 	
 	public static Connection getConnection() {
 		Connection con = null;

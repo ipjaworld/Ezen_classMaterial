@@ -22,17 +22,17 @@
 -- SQL>alter user 사용자계정명 account unlock;
 
 -- 사용자 생성
--- SQL>create user scott identified by tiger;
+SQL>create user scott identified by tiger;
 -- 암호 변경
--- SQL>alter user scott identified by 변경할암호;
+SQL>alter user scott identified by 변경할암호;
 -- 권한 부여
--- SQL>grant dba to scott;
+SQL>grant dba to scott;
 
 -- 접속하고 잇는 계정 변경
 --SQL>conn scott/tiger
 
 -- 현재 접속하고 있는 계정 확인
--- SQL>show user;
+SQL>show user;
 
 -- 조회 검색명령어
 select * from tab; -- scott 계정 테이블 목록
