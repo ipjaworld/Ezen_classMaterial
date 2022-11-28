@@ -1,5 +1,5 @@
 --DDL(Data Definition Language)데이터 정의어
-
+select * from BOOKLIST;
 --테이블의 생성(Create)
 
 --Create Table 테이블 이름(
@@ -61,7 +61,7 @@ select * from booklist;
 --    - PRIMARY KEY = UNIQUE KEY + NOT NULL
 --  UNIQUE KEY
 --    - 테이블에 저장된 행 데이터를 고유하게 식별하기 위한 고유키를 정의 합니다
---    - 단 NULL 은 고유키 제약의 대상의 아니무로, NULL값을 가진 행이 여러개가 UNIQUE KEY 
+--    - 단 NULL 은 고유키 제약의 대상의 아니므로, NULL값을 가진 행이 여러개가 UNIQUE KEY 
 --      제약에   위반하지는 않습니다
 --  NOT NULL
 --    - 비어있는 상태, 아무것도 없는 상태를 허용하지 않습니다   - 입력 필수
@@ -69,7 +69,7 @@ select * from booklist;
 --    - 입력할 수 있는 값의 범위를 제한한다. CHECK 제약으로는 TRUE or FALSE로   평가할 수 있는
 --      논리식을  지정합니다
 --   FOREIGN KEY 
---     - 관계형 데이터 베이스에서 테이블간에 관계를 정의하기 위해 키본키를  다른 테이블의  외래키로 
+--     - 관계형 데이터 베이스에서 테이블간에 관계를 정의하기 위해 기본키를  다른 테이블의  외래키로 
 --       복사하는 경우 외래키가 생성됩니다    - 참조 무결성 제약 옵션이 생성
 
 

@@ -63,7 +63,7 @@ where sal>(select min(sal) from emp where job='SALESMAN')	  and   job<>'SALESMAN
 select ename, job, sal from emp
 where sal > any(select sal from emp where job='SALESMAN') 	and   job<>'SALESMAN';
 
-
+select * from emp;
 
 
 
