@@ -29,7 +29,7 @@
 -- SQL>grant dba to scott;
 
 -- 접속하고 잇는 계정 변경
---SQL>conn scott/tiger
+-- SQL>conn scott/tiger
 
 -- 현재 접속하고 있는 계정 확인
 -- SQL>show user;

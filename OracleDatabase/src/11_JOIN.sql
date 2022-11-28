@@ -170,6 +170,8 @@ select * from emp left outer join dept on  emp.deptno = dept.deptno;
 select * from emp right outer join dept on  emp.deptno = dept.deptno;
 -- 기준이 되는 필드명중 A 테이블의 필드에는 있으나 B테이블 필드에는 해당값이 없는 경우에 대한 표현여부결정
 
+select a.booknum as anum, b.booknum as bnum 
+from booklist a, rentlist b where a.booknum(+) = b.booknum;
 
 
 

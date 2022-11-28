@@ -13,7 +13,7 @@ alter table booklist rename column subject to title;
 alter table booklist rename column title to subject;
 
 -- memberlist 테이블의 membername 필드를 name 으로 변경하세요
- alter table memberlist rename column membername to name;
+alter table memberlist rename column membername to name;
 
 --  rentlist 테이블의 rent_date 필드를  rentdate 로 변경하세요
 alter table rentlist rename column rent_date to rentdate;
