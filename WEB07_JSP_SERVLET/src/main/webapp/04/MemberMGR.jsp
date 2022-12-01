@@ -46,7 +46,7 @@
 			out.println("<td>" + rs.getString("phone") + "</td>");
 			out.println("<td align='center'><a href='updateForm.jsp?userid="
 				+ rs.getString("id") +"'>수정</a></td>");
-			out.println("<td align='center'><a href=''>삭제</a></td>");
+			out.println("<td align='center'><a href='delete.jsp?userid=" + rs.getString("id") +"'>삭제</a></td>");
 			out.println("</tr>");
 		}
 	}catch(Exception e){ e.printStackTrace();

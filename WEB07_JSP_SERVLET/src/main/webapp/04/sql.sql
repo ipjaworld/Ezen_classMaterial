@@ -10,3 +10,5 @@ INSERT INTO MEM VALUES('SANG', '전상오', '1234', '010-5555-6666');
 INSERT INTO MEM VALUES('LIGHT', '김빛나', '1234', '010-2222-3333');
 
 select * from mem;
+
+alter table mem add constraint pk_mem primary key(id);
