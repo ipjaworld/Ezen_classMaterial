@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginUser")!=null)
-			url = "main.jsp";
+			url = "main.do";
 		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 		}else if( !mdto.getPwd().equals(pwd) ) {
 			request.setAttribute("message", "비밀번호가 올바르지 않습니다.");
 		}else if( mdto.getPwd().equals(pwd) ) {
-			url = "main.jsp";
+			url = "main.do";
 			// 로그인한 사람의 정보(mdto)를 세션에 저장합니다.
 			// session은 각 페이지에 있는 request 객체를 통해서 얻어 쓸 수 있는데,  jsp 페이지에서는 그 페이지가 갖고 있는
 			// session을 별도 작업없이 그냥 사용해도 되지만,

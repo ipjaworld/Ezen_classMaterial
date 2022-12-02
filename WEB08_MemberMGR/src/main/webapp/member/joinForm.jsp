@@ -20,6 +20,38 @@
 		// 그래서 첫번째 요소는 서블릿의 urlmapping 이름을 씁니다
 		// 서블릿 호출시 파라미터를 위와 같이 호출되는 주소 뒤에 ? 함께 전달할 수 있습니다.
 	}
+	
+	function joinCheck(){
+		if( document.frm.name.value==""){
+			alert('이름은 필수 입력 사항입니다.');
+			document.frm.name.focus();
+			return false;
+		}
+		if( document.frm.userid.value.length==0){
+			alert("아이디는 필수 입력 사항입니다.");
+			document.frm.userid.focus();
+			return false;
+		}
+		if( document.frm.pwd.value.length==0){
+			alert("비밀번호는 필수입력사항입니다.");
+			document.frm.pwd.focus();
+			return false;
+		}
+		if( document.frm.userid.value != document.frm.reid.value ){
+			alert("아이디 중복체크를 하지 않으셨습니다.");
+			document.frm.userid.focus();
+			return false;
+		}
+		if( document.frm.pwd.value != document.frm.pwd_check.value){
+			alert("비밀번호 확인이 일치하지 않습니다.");
+			document.frm.pwd.focus();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -33,9 +65,9 @@
 		        <!-- reid 태그 : 아이디 중복 체크 후 사용가능한 아이디라면 사용할 아이디를 reid 태그의 value 값으로 저장합니다
 		        그리고 나중에 현재 아이디가 입력된 userid와 reid 값이 같은 값인지 보고 중복 체크 여부를 체크합니다 -->
 		    </tr>
-		    <tr><td>비밀번호</td><td><input type="password" name="pwd" size="20" />&nbsp;</td></tr>
+		    <tr><td>비밀번호</td><td><input type="password" name="pwd" size="20" />&nbsp;*</td></tr>
 		    <tr><td>비밀번호 확인</td>
-		        <td><input type="password" name="pwd_check" size="20" />&nbsp;</td></tr>
+		        <td><input type="password" name="pwd_check" size="20" />&nbsp;*</td></tr>
 		    <tr><td>이메일</td><td><input type="text" name="email" size="20"></td></tr>
 		    <tr><td>전화번호</td><td><input type="text" name="phone" size="20"></td></tr>
 		    <tr><td>등급</td><td><input type="radio" name="admin" value="0" checked="checked">
