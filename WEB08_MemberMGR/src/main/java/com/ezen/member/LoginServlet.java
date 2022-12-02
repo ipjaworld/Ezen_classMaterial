@@ -32,8 +32,16 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dp = request.getRequestDispatcher("member/loginForm.jsp");
+		
+		String url = "member/loginForm.jsp";
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser")!=null)
+			url = "main.jsp";
+		
+		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
+		
 	}
 
 	/**
