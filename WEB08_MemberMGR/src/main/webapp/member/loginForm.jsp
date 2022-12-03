@@ -31,7 +31,7 @@
 			<!-- loginCheck() 함수의 리턴 값을 다시 form에 리턴해줌으로써 폼의 동작이 action 에 지정한 곳으로
 			계속 이동을 진행할지 아니면 멈출지를 결정합니다. -->
 			<input type="reset" value="취소">
-			<input type="button" value="회원가입" onClick=""></td></tr>
+			<input type="button" value="회원가입" onClick="location.href='join.do'"></td></tr>
 			<tr><td colspan="2">${message }</td></tr>
 	</table>
 </form>
