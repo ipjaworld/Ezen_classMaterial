@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezen.board.dto.BoardDto;
+import com.ezen.board.dto.ReplyDto;
 import com.ezen.board.util.Dbman;
 
 public class BoardDao {
@@ -73,14 +74,15 @@ public class BoardDao {
 			pstmt.setInt(1, Integer.parseInt(num));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				bdto = new BoardDto();
-				bdto.setNum( rs.getInt("num") );
-				bdto.setPass( rs.getString("pass") );
-				bdto.setUserid( rs.getString("userid") );
-				bdto.setEmail( rs.getString("email") );
-				bdto.setTitle( rs.getString("title") );
-				bdto.setReadcount( rs.getInt("readcount") );
-				bdto.setWritedate( rs.getTimestamp("writedate") );
+				 bdto= new BoardDto();
+		         bdto.setNum(rs.getInt("num"));
+		         bdto.setPass(rs.getString("pass"));
+		         bdto.setUserid(rs.getString("userid"));
+		         bdto.setEmail(rs.getString("email"));
+		         bdto.setTitle(rs.getString("title"));
+		         bdto.setContent(rs.getString("content"));
+		         bdto.setReadcount(rs.getInt("readcount"));
+		         bdto.setWritedate(rs.getTimestamp("writedate"));
 			}
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs);}
@@ -120,28 +122,136 @@ public class BoardDao {
 		return null;
 	}
 
-	public int insertBoard(BoardDto bdto) {
-		int result = 0;
+	public void insertBoard(BoardDto bdto) {
 		con = Dbman.getConnection();
-		String sql = "insert into board(num, pass, userid, email, title, content, readcount, writedate) "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into board(num, userid, pass, email, title, content) "
+				+ "values(board_seq.nextVal, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bdto.getNum() );
+			pstmt.setString(1, bdto.getUserid() );
 			pstmt.setString(2, bdto.getPass() );
-			pstmt.setString(3, bdto.getUserid() );
-			pstmt.setString(4, bdto.getEmail() );
-			pstmt.setString(5, bdto.getTitle() );
-			pstmt.setString(6, bdto.getContent()) );
-			pstmt.setInt(5, bdto.getReadcount() );
-			pstmt.setString(5, bdto.getWritedate() );
+			pstmt.setString(3, bdto.getEmail() );
+			pstmt.setString(4, bdto.getTitle() );
+			pstmt.setString(5, bdto.getContent() );
+
+			//result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+
+	}
+
+	public void updateBoard(BoardDto bdto) {
+		con = Dbman.getConnection();
+		String sql = "update board set userid=?, pass=?, email=?, title = ?, content = ? where num = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bdto.getUserid() );
+			pstmt.setString(2, bdto.getPass() );
+			pstmt.setString(3, bdto.getEmail() );
+			pstmt.setString(4, bdto.getTitle() );
+			pstmt.setString(5, bdto.getContent() );
+			pstmt.setInt(6, bdto.getNum() );
 			
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();
 		}finally { Dbman.close(con, pstmt, rs); }
 		
-		return result;
 		
 	}
+
+	public void deleteBoard(String num) {
+		
+		String sql = "delete from board where num=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(num));
+			pstmt.executeUpdate();
+		}catch(SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+	}
+
+	public ArrayList<ReplyDto> selectReply(String num) {
+		ArrayList<ReplyDto> list = new ArrayList<ReplyDto>();
+		
+		con = Dbman.getConnection();
+		String sql = "select * from reply where boardnum=? order by replynum desc";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,Integer.parseInt(num) );
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				ReplyDto rdto = new ReplyDto();
+				rdto.setReplynum(rs.getInt("replynum"));
+				rdto.setBoardnum(rs.getInt("boardnum"));
+				rdto.setUserid(rs.getString("userid"));
+				rdto.setWritedate(rs.getTimestamp("writedate"));
+				rdto.setContent(rs.getString("content"));
+				list.add(rdto);
+			}
+			
+		}catch (SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+		return list;
+	}
+
+	public void insertReply(ReplyDto rdto) {
+		
+		con = Dbman.getConnection();
+		String sql = "insert into reply( replynum, boardnum, userid, content)"
+				+ " values( reply_seq.nextVal, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rdto.getBoardnum() );
+			pstmt.setString(2, rdto.getUserid() );
+			pstmt.setString(3, rdto.getContent() );
+			
+			pstmt.executeUpdate();
+
+		}catch (SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+	}
+
+	public void deleteReply(String rpnum) {
+		String sql = "delete from reply where replynum=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(rpnum));
+			pstmt.executeUpdate();
+		}catch(SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+	}
+
+	public int getReplyCnt(int num) {
+		int count=0;
+		
+		String sql = "select count(*) as cnt from reply where boardnum=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if( rs.next() )
+				count = rs.getInt("cnt");
+			pstmt.executeUpdate();
+		}catch(SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+		return count;
+	}
+	
 }
+
+
+
+

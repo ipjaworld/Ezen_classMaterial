@@ -29,3 +29,35 @@ function boardCheck(){
 	}
 	return true;
 }
+
+
+
+function checkPass( boardNum, popupWinName ){
+	var url = "board.do?command=boardPassForm&num=" + boardNum;
+	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=500, height=300";
+	window.open( url, popupWinName, opt);
+}
+
+
+function passCheck(){
+	if( document.frm.pass.value.length == 0 ){
+		alert("비밀번호를 입력하세요.");
+		document.frm.pass.focus();
+		return false;
+	}
+	return true;
+}
+
+
+function reply_check(){
+	if( document.frm_reply.content.value == "" ){
+		alert("댓글 내용을 입력하세요.");
+		document.frm_reply.content.focus();
+		return false;
+	}
+	return true;
+}
+
+
+
+

@@ -25,26 +25,26 @@ public class BoardWriteAction implements Action {
 		//String num = request.getParameter("num");
 		
 		BoardDto bdto = new BoardDto();
-		
-		bdto.setEmail(request.getParameter("email"));
-		bdto.setNum(Integer.parseInt(request.getParameter("admin")));
-		bdto.setContent(request.getParameter("name"));
-		bdto.setPass(request.getParameter("phone"));
-		bdto.setReadcount(Integer.parseInt(request.getParameter("pwd")));
-		bdto.setReplycnt(Integer.parseInt(request.getParameter("userid")));
-		bdto.setTitle(request.getParameter("userid"));
-		bdto.setUserid(request.getParameter("userid"));
-		bdto.setWritedate((Timestamp)request.getParameter("writedate"));
-
 		BoardDao bdao = BoardDao.getInstance();
 		
-		//String url = "main.do";
-		String url = "board/main.jsp";
-		
-		int result = bdao.insertBoard(bdto);
+		bdto.setEmail(request.getParameter("email"));
+		bdto.setContent(request.getParameter("content"));
+		bdto.setPass(request.getParameter("pass"));
+		bdto.setTitle(request.getParameter("title"));
+		bdto.setUserid(request.getParameter("userid"));
 
-	    RequestDispatcher rd = request.getRequestDispatcher(url);
-		rd.forward(request, response);
+		
+		bdao.insertBoard( bdto );
+
+		//String url = "main.do";
+		String url = "board.do?command=main";
+		
+		//int result = bdao.insertBoard(bdto);
+
+	    //RequestDispatcher rd = request.getRequestDispatcher(url); 이 포스트 방식, 포워드를 안쓴다.(경로가 노출이 될 수 있어서)
+		//rd.forward(request, response);
+		
+		response.sendRedirect(url);
 
 	}
 

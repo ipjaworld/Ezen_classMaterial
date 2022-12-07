@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +32,13 @@
 				<td width="100">${board.num}</td>
 				<td align="left">
 					&nbsp;<a href="board.do?command=boardView&num=${board.num}"> ${board.title}</a>
+					<c:if test="${board.replycnt>0}">
+						<span style="color:red;font-weight:bold;">[${board.replycnt}]</span>
+					</c:if>
 				</td>
 				<td width="100">${board.userid}</td>
-				<td width="100">${board.num}</td>
-				<td width="100">${board.num}</td>
+				<td width="200"><fmt:formatDate value="${board.writedate}"/></td>
+				<td width="100">${board.readcount}</td>
 			</tr>
 		</c:forEach>
 		

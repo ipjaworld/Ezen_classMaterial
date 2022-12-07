@@ -12,7 +12,9 @@ public class BoardDto {
 	private String content;
 	private int readcount;
 	private Timestamp writedate;
-	private int replycnt;
+	
+	private int replycnt; // 현재 게시물의 덧글의 개수를 저장할 변수
+	
 	public int getNum() {
 		return num;
 	}
