@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.ezen.board.dto.BoardDto;
 import com.ezen.board.dto.ReplyDto;
 import com.ezen.board.util.Dbman;
+import com.ezen.board.util.Paging;
 
 public class BoardDao {
 	private BoardDao() {}
@@ -19,13 +20,21 @@ public class BoardDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public ArrayList<BoardDto> selectAll() {
+	public ArrayList<BoardDto> selectAll( Paging paging ) {
 		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
 		
 		con = Dbman.getConnection();
-		String sql = "select * from board order by num desc";
+		String sql = "select * from ("
+				+ "select * from ("
+				+ "select rownum as rn, b.* from ((select * from board order by num desc) b)"
+				+ ") where rn>=?"
+				+ ")where rn<=?";
 		try {
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, paging.getStartNum() );
+			pstmt.setInt(2, paging.getEndNum() );
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDto bdto = new BoardDto();
@@ -244,6 +253,23 @@ public class BoardDao {
 			if( rs.next() )
 				count = rs.getInt("cnt");
 			pstmt.executeUpdate();
+		}catch(SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		
+		return count;
+	}
+
+	public int getAllCount() {
+		int count=0;
+		
+		String sql = "select count(*) as cnt from board";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if( rs.next() )
+				count = rs.getInt("cnt");
+				pstmt.executeUpdate();
 		}catch(SQLException e) {e.printStackTrace();
 		}finally { Dbman.close(con, pstmt, rs); }
 		

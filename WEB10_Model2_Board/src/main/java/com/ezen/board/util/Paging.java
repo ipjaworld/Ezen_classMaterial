@@ -43,7 +43,7 @@ public class Paging {
 		
 		// 2. totalPage 계산
 		// 총게시물수(totalCount)를 한개에 화면에 표시될 게시물수(displayRow)로 나누고, 소수점자리 올림해서 계산
-		int totalPage = (int)Math.ceil( totalCount/(double)displayPage );
+		int totalPage = (int)Math.ceil( totalCount/(double)displayRow );
 		// 108/10 -> 10.8	-> 11.0	-> 11 : 총게시물이 108개이면 필요한 총페이지수는 11페이지까지 필요
 		// 75/10 -> 7.5 -> 8.0 -> 8	: 총게시물이 75개이면 필요한 총 페이지수는 8페이지까지 필요
 		
@@ -67,6 +67,7 @@ public class Paging {
 		endNum = page*displayRow;
 		// 현재 화면의 긑 게시물 번호		1page:10, 2page:20	,	3page:30,	4page : 40
 		
+		System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum);
 	}
 	
 	public int getPage() {
@@ -80,6 +81,7 @@ public class Paging {
 	}
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+		paging();
 	}
 	public int getDisplayRow() {
 		return displayRow;

@@ -116,4 +116,25 @@ select * from reply;
 commit
 
 
+select * from board order by num desc;
+
+select rownum, * from board order by num desc;		-- ¿¡·¯
+
+select rownum, b.* from (select * from board order by num desc) b;
+
+select rownum, b.* 
+from ((select * from board order by num desc) b) 
+where rownum>11 and rownum<=20;
+
+select * from (
+	select * from (
+		select rownum as rn, b.* from ((select * from board order by num desc) b)
+	) where rn >= 11
+)where rn<=20;
+
+
+
+
+
+
 

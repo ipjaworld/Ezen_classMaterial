@@ -13,8 +13,13 @@ import com.ezen.board.controller.action.board.DeleteBoardAction;
 import com.ezen.board.controller.action.board.MainAction;
 import com.ezen.board.controller.action.board.UpdateBoardAction;
 import com.ezen.board.controller.action.board.UpdateBoardFormAction;
+import com.ezen.board.controller.action.member.IdcheckAction;
+import com.ezen.board.controller.action.member.JoinAction;
+import com.ezen.board.controller.action.member.JoinFormAction;
 import com.ezen.board.controller.action.member.LoginAction;
 import com.ezen.board.controller.action.member.LoginFormAction;
+import com.ezen.board.controller.action.member.UpdateMemberAction;
+import com.ezen.board.controller.action.member.UpdateMemberFormAction;
 
 public class ActionFactory {
 	private ActionFactory(){}
@@ -38,6 +43,11 @@ public class ActionFactory {
 		else if( command.equals("deleteBoard") ) ac = new DeleteBoardAction();
 		else if( command.equals("addReply") ) ac = new AddReplyAction();
 		else if( command.equals("delRep") ) ac = new DelRepAction();
+		else if( command.equals("joinForm") ) ac = new JoinFormAction();
+		else if( command.equals("join") ) ac = new JoinAction();
+		else if( command.equals("idcheck") ) ac = new IdcheckAction();
+		else if( command.equals("updateMemberForm") ) ac = new UpdateMemberFormAction();
+		else if( command.equals("updateMember") ) ac = new UpdateMemberAction();
 		
 		return ac;
 	}
