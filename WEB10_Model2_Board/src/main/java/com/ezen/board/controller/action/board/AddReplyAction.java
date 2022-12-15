@@ -21,9 +21,9 @@ public class AddReplyAction implements Action {
 		
 		ReplyDto rdto = new ReplyDto();
 		
-		rdto.setUserid(userid);
-		rdto.setContent(content);
-		rdto.setBoardnum(boardnum);
+		rdto.setUserid( userid );
+		rdto.setContent( content );
+		rdto.setBoardnum( boardnum );
 		
 		BoardDao bdao = BoardDao.getInstance();
 		bdao.insertReply(rdto);

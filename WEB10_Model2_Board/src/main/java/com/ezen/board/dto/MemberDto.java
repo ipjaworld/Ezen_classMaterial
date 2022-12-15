@@ -6,8 +6,9 @@ public class MemberDto {
 	private String userid;
 	private String pwd;
 	private String email;
-	private String phone; 
+	private String phone;
 	private int admin;
+	
 	public String getName() {
 		return name;
 	}

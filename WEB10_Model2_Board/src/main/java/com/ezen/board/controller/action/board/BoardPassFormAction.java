@@ -14,8 +14,8 @@ public class BoardPassFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("board/boardCheckPass.jsp");
-		rd.forward(request, response);
+		RequestDispatcher dp = request.getRequestDispatcher("board/boardCheckPass.jsp");
+		dp.forward(request, response);
 
 	}
 

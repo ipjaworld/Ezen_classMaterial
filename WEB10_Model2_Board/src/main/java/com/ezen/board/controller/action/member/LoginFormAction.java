@@ -18,11 +18,12 @@ public class LoginFormAction implements Action {
 		String url = "member/loginForm.jsp";
 		
 		HttpSession session = request.getSession();
-		if( session.getAttribute("loginUser") != null)
+		if( session.getAttribute("loginUser") != null ) 
 			url = "board/main.do";
-		
+			
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
+
 
 	}
 

@@ -6,8 +6,8 @@ import com.ezen.board.controller.action.board.BoardCheckPassAction;
 import com.ezen.board.controller.action.board.BoardPassFormAction;
 import com.ezen.board.controller.action.board.BoardViewAction;
 import com.ezen.board.controller.action.board.BoardViewWithoutCountAction;
-import com.ezen.board.controller.action.board.BoardWriteAction;
-import com.ezen.board.controller.action.board.BoardWriteFormAction;
+import com.ezen.board.controller.action.board.BoardWirteAction;
+import com.ezen.board.controller.action.board.BoardWirteFormAction;
 import com.ezen.board.controller.action.board.DelRepAction;
 import com.ezen.board.controller.action.board.DeleteBoardAction;
 import com.ezen.board.controller.action.board.MainAction;
@@ -22,7 +22,8 @@ import com.ezen.board.controller.action.member.UpdateMemberAction;
 import com.ezen.board.controller.action.member.UpdateMemberFormAction;
 
 public class ActionFactory {
-	private ActionFactory(){}
+
+	private ActionFactory() {}
 	private static ActionFactory itc = new ActionFactory();
 	public static ActionFactory getInstance() { return itc; }
 	
@@ -30,11 +31,11 @@ public class ActionFactory {
 		Action ac = null;
 		
 		if( command.equals("loginForm") ) ac = new LoginFormAction();
-		else if( command.equals("login")) ac = new LoginAction();
-		else if( command.equals("main")) ac = new MainAction();
-		else if( command.equals("boardView")) ac = new BoardViewAction();
-		else if( command.equals("boardWriteForm") ) ac = new BoardWriteFormAction();
-		else if( command.equals("boardWrite") ) ac = new BoardWriteAction();
+		else if( command.equals("login") ) ac = new LoginAction();
+		else if( command.equals("main") ) ac = new MainAction();
+		else if( command.equals("boardView") ) ac = new BoardViewAction();
+		else if( command.equals("boardWriteForm") ) ac = new BoardWirteFormAction();
+		else if( command.equals("boardWrite") ) ac = new BoardWirteAction();
 		else if( command.equals("boardPassForm") ) ac = new BoardPassFormAction();
 		else if( command.equals("boardCheckPass") ) ac = new BoardCheckPassAction();
 		else if( command.equals("updateBoardForm") ) ac = new UpdateBoardFormAction();
@@ -43,7 +44,7 @@ public class ActionFactory {
 		else if( command.equals("deleteBoard") ) ac = new DeleteBoardAction();
 		else if( command.equals("addReply") ) ac = new AddReplyAction();
 		else if( command.equals("delRep") ) ac = new DelRepAction();
-		else if( command.equals("joinForm") ) ac = new JoinFormAction();
+		else if( command.equals("joinForm" ) ) ac = new JoinFormAction();
 		else if( command.equals("join") ) ac = new JoinAction();
 		else if( command.equals("idcheck") ) ac = new IdcheckAction();
 		else if( command.equals("updateMemberForm") ) ac = new UpdateMemberFormAction();
@@ -51,4 +52,11 @@ public class ActionFactory {
 		
 		return ac;
 	}
+	
 }
+
+
+
+
+
+

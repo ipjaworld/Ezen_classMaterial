@@ -16,7 +16,7 @@ public class UpdateBoardFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 전달된 게시물 번호로 게시물을 조회하고 그 게시물은 request 담아서 updateBoardForm.jsp 로 이동
+		// 전달된 게시물 번호로 게시물을 조회하고 그 게시물은 request 담아서 updateBoardForm.jsp 로 이동ㅎ
 		
 		String num = request.getParameter("num");
 		BoardDao bdao = BoardDao.getInstance();
@@ -26,7 +26,7 @@ public class UpdateBoardFormAction implements Action {
 		
 		RequestDispatcher dp = request.getRequestDispatcher("board/updateBoardForm.jsp");
 		dp.forward(request, response);
-		
+
 	}
 
 }

@@ -21,21 +21,21 @@ public class BoardViewAction implements Action {
 		String num = request.getParameter("num");
 		
 		BoardDao bdao = BoardDao.getInstance();
-		//BoardDto bdto = bdao.selectBoardOne(num);
 		// 조회수 증가와 게시물 조회를 하나의 메서드에서 실행. -> 권장하지 않음.
+		//BoardDto bdto = bdao.selectBoardOne(num);
 		
-		// 1. 해당 게시물의 조회수를 1 증가시킵니다. 메서드 이름 readCountPlusOne
+		// 1. 해당 게시물의 조회수를 1 증가시킵니다. 메서드이름 readCountPlusOne
 		bdao.readCountPlusOne(num);
 		// 2. num 값에 해당하는 게시물을 조회해서 리턴받습니다. 메서드 이름 getBoard
 		BoardDto bdto = bdao.getBoard(num);
 		
-		ArrayList<ReplyDto> list = bdao.selectReply( num );
+		ArrayList<ReplyDto> list = bdao.selectReply( num );		
 		
-		request.setAttribute("board", bdto); 
+		request.setAttribute("board", bdto);
 		request.setAttribute("replyList", list);
 		
-		RequestDispatcher dp = request.getRequestDispatcher("board/boardView.jsp");
-	    dp.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("board/boardView.jsp");
+		rd.forward(request, response);
 
 	}
 

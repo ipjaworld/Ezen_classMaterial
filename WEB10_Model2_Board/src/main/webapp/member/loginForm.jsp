@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
 <title>loginForm.jsp</title>
 
 <link rel="stylesheet" type="text/css" href="css/board.css">
-<script type="text/javascript"></script>
+<script src="script/board.js"></script>
 
 </head>
 <body>
@@ -24,12 +23,13 @@
 		<div class="item"><input type="password" name="pwd" id="loginpwd" size="20"></div>
 	</div>
 	<div class="box">
-		<input type="submit" value="로그인" onclick="return loginCheck();">
-		<input type="button" value="회원가입"
-		onclick="location.href='board.do?command=joinForm'">
+		<input type="submit" value="로그인" onClick="return loginCheck();">
+		<input type="button" value="회원가입" 
+		onClick="location.href='board.do?command=joinForm'">
 	</div>
 	<div class="box">${message}</div>
 </form>
+
 
 </body>
 </html>

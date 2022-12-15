@@ -16,7 +16,7 @@ public class DeleteBoardAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String num = request.getParameter("num");
-		
+
 		BoardDao bdao = BoardDao.getInstance();
 		bdao.deleteBoard( num );
 		

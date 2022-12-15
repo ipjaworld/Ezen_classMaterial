@@ -12,8 +12,28 @@ public class BoardDto {
 	private String content;
 	private int readcount;
 	private Timestamp writedate;
+	private int replycnt; // 현제 게시물의 댓글의 갯수를 저장할 변수
 	
-	private int replycnt; // 현재 게시물의 덧글의 개수를 저장할 변수
+	private String imgfilename;   // 이미지 파일이름 저장할 변수
+	
+	
+	public String getImgfilename() {
+		return imgfilename;
+	}
+	public void setImgfilename(String imgfilename) {
+		this.imgfilename = imgfilename;
+	}
+	
+	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}  
+	
+	
+	
 	
 	public int getNum() {
 		return num;
@@ -63,12 +83,7 @@ public class BoardDto {
 	public void setWritedate(Timestamp writedate) {
 		this.writedate = writedate;
 	}
-	public int getReplycnt() {
-		return replycnt;
-	}
-	public void setReplycnt(int replycnt) {
-		this.replycnt = replycnt;
-	}
+	
 	
 	
 }

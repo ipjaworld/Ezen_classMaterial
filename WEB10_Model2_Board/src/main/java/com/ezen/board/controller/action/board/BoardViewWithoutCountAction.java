@@ -22,14 +22,14 @@ public class BoardViewWithoutCountAction implements Action {
 		BoardDao bdao = BoardDao.getInstance();
 		BoardDto bdto = bdao.getBoard(num);
 		
-		ArrayList<ReplyDto> list = bdao.selectReply( num );
+		ArrayList<ReplyDto> list = bdao.selectReply( num );		
 		
-		request.setAttribute("board", bdto); 
+		request.setAttribute("board", bdto);
 		request.setAttribute("replyList", list);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("board/boardView.jsp");
 		rd.forward(request, response);
-		
+
 	}
 
 }

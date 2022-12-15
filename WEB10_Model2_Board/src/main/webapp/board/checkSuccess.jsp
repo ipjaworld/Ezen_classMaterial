@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,7 @@
 
 <script type="text/javascript">
 
-	if( window.name == 'update'){
+	if( window.name=='update'){
 		window.opener.location.href = "board.do?command=updateBoardForm&num=${param.num}";
 	}else if( window.name=='delete'){
 		var bool = confirm("정말로 삭제할까요?");

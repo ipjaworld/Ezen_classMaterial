@@ -25,18 +25,17 @@ public class LoginAction implements Action {
 		
 		String url = "member/loginForm.jsp";
 		
-		if( mdto == null ) request.setAttribute("message", "아이디가 없습니다.");
-		else if(mdto.getPhone() == null ) request.setAttribute("message", "DB오류. 관리자에게 문의하세요");
-		else if(!mdto.getPwd().equals(pwd)) request.setAttribute("message", "ㅂ비밀번호가 틀립니다.");
-		else if(mdto.getPwd().equals(pwd)) {
+		if( mdto == null ) request.setAttribute("message", "아이디가 없습니다");
+		else if( mdto.getPwd() == null ) request.setAttribute("message", "DB오류. 관리자에게 문의하세요");
+		else if( !mdto.getPwd().equals(pwd) ) request.setAttribute("message", "비밀번호가 틀립니다");
+		else if( mdto.getPwd().equals(pwd) ) {
 			url = "board.do?command=main";
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", mdto);
-		}else request.setAttribute("message", "아이디가 없습니다.");
+			session.setAttribute("loginUser", mdto );
+		}else request.setAttribute("message", "왜 로그인이 안되는지 나도 잘 모르겠습니다.");
 		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
-	    dp.forward(request, response);
-
+		dp.forward(request, response);
 
 	}
 
