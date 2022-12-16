@@ -30,11 +30,11 @@
 					</c:when>
 					<c:otherwise>
 						<li>${loginUser.name}(${loginUser.id})</li>
-						<li><a href="#">정보수정</a></li>
+						<li><a href="shop.do?command=editForm">정보수정</a></li>
 						<li><a href="shop.do?command=logout">LOGOUT</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="#">CART</a></li>
+				<li><a href="shop.do?command=cartList">CART</a></li>
 				<li><a href="#">MY PAGE</a></li>
 				<li><a href="#">Q &amp; A</a></li>
 
@@ -44,12 +44,12 @@
 		<nav id="category_menu"> <!-- 카테고리 메뉴 시작 Heels Boots Sandals .. 등등 -->
 		
 			<ul>
-				<li><a href="#">Heels</a></li>
-				<li><a href="#">Boots</a></li>
-				<li><a href="#">Sandals</a></li>
-				<li><a href="#">Sneakers</a></li>
-				<li><a href="#">Sleeper</a></li>
-				<li><a href="#">On Sale</a></li>
+				<li><a href="shop.do?command=category&kind=1">Heels</a></li>
+				<li><a href="shop.do?command=category&kind=2">Boots</a></li>
+				<li><a href="shop.do?command=category&kind=3">Sandals</a></li>
+				<li><a href="shop.do?command=category&kind=4">Sneakers</a></li>
+				<li><a href="shop.do?command=category&kind=5">Sleeper</a></li>
+				<li><a href="shop.do?command=category&kind=6">On Sale</a></li>
 			</ul>
 		
 		</nav> <!-- 카테고리 메뉴 끝 -->

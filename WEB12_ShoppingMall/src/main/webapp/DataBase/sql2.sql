@@ -61,6 +61,7 @@ values( product_seq.nextval,  '샌달', '3', 5000, 5500, 500,'사계절용 샌달입니다.
 insert into product(pseq,  name, kind, price1, price2, price3, content, image,bestyn)
 values( product_seq.nextval,  '스니커즈', '5', 15000, 20000, 5000,'활동성이 좋은 스니커즈입니다.', 'w-05.jpg','n');
 
+select * from product;
 
 
 -- 카트 추가

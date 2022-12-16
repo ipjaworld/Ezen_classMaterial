@@ -11,7 +11,7 @@
 			<label>Password</label><input type="password" name="pwd"><br>
 			<label>Retype Password</label><input type="password" name="pwdCheck"><br>
 			<label>Name</label><input type="text" name="name"><br>
-			<label>E-Mail</label><input type="text" name="email"><br>
+			<label>Phone Number</label><input type="text" name="phone"><br>
 		</fieldset>
 		
 		<fieldset><legend>Optional</legend>
@@ -19,7 +19,7 @@
 			<input type="button" value="주소 찾기" class="dup" onClick="post_zip()"><br>
 			<label>Address</label><input type="text" name="address1" size="50"><br>
 			<label>&nbsp;</label><input type="text" name="address2" size="25"><br>
-			<label>Phone Number</label><input type="text" name="phone"><br>
+			<label>E-Mail</label><input type="text" name="email"><br>
 		</fieldset>
 		
 		<div class="clear"></div>
