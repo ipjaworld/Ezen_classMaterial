@@ -15,8 +15,14 @@ import com.ezenac.shop.controller.action.member.MemberUpdateAction;
 import com.ezenac.shop.controller.action.mypage.CartDeleteAction;
 import com.ezenac.shop.controller.action.mypage.CartInsertAction;
 import com.ezenac.shop.controller.action.mypage.CartListAction;
+import com.ezenac.shop.controller.action.mypage.MypageAction;
+import com.ezenac.shop.controller.action.mypage.OrderAllAction;
+import com.ezenac.shop.controller.action.mypage.OrderDetailAction;
+import com.ezenac.shop.controller.action.mypage.OrderInsertAction;
+import com.ezenac.shop.controller.action.mypage.OrderListAction;
 import com.ezenac.shop.controller.action.product.CategoryAction;
 import com.ezenac.shop.controller.action.product.ProductDetailAction;
+import com.ezenac.shop.controller.action.qna.QnaListAction;
 
 public class ActionFactory {
 
@@ -45,6 +51,14 @@ public class ActionFactory {
 		else if( command.equals("cartInsert") ) ac = new CartInsertAction();
 		else if( command.equals("cartList") ) ac = new CartListAction();
 		else if( command.equals("cartDelete") ) ac = new CartDeleteAction();
+		else if( command.equals("orderInsert") ) ac = new OrderInsertAction();
+		else if( command.equals("orderList") ) ac = new OrderListAction();
+		else if( command.equals("mypage") ) ac = new MypageAction();
+		else if( command.equals("orderAll") ) ac = new OrderAllAction();
+		else if( command.equals("orderDetail") ) ac = new OrderDetailAction();
+		
+		else if( command.equals("qnaList") ) ac = new QnaListAction();
+		
 		
 		return ac;
 	}
