@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<% response.sendRedirect("shop.do?command=index"); %>
+<% response.sendRedirect("shop.do?command=admin"); %>
 
 </body>
 </html>

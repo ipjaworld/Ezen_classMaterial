@@ -2,18 +2,18 @@ package com.ezenac.shop.util;
 
 public class Paging {
 	
-	private int page = 1;
-	private int totalCount;	// 여기서 paging 으로 멤버메서드 호출
-	private int beginPage;
-	private int endPage;
-	private int displayRow = 5;
-	private int displayPage = 5;
-	private boolean prev;
-	private boolean next;
-	private int startNum;
-	private int endNum;
+	private int page = 1;	// 현재 보고자 하는 페이지 번호
+	private int totalCount;	// 게시물의 총갯수	// 여기서 paging 으로 멤버메서드 호출
+	private int beginPage;		// 현재 화면에 표시되는 페이지 중에 제일 처음 페이지 1 2 3 4 5 ▶ 중 1에 해당하는 숫자
+	private int endPage;	// 현재 화면에 표시되는 페이지 중 제일 마지막에 나오는 페이지 1 2 3 4 5 ▶ 중 5에 해당하는 숫자
+	private int displayRow = 5;		// 한 화면에 표시할 게시물 갯수
+	private int displayPage = 5;		// 한 화면에 표시할 페이지 갯수 1 2 3 4 5 ▶ 경우 페이지 갯수는 5
+	private boolean prev;	// 이전 버튼 표시 여부
+	private boolean next;	// 다음 버튼 표시 여부
+	private int startNum;		// 현재 화면에 표시될 게시물들의 시작 번호(게시물 번호, num 이나 qseq는 아니고 검색된 게시물의 순서)
+	private int endNum;		// 현재 화면에 표시될 게시물의 끝번호
 	
-	private void paging() {
+	private void paging() {	// totalCount를 제외한 모든 멤버변수에 해당하는 값들을 계산
 		endPage = ( (int)Math.ceil( page/(double)displayPage) )*displayPage;
 		beginPage = endPage - (displayPage-1);
 		int totalPage = (int)Math.ceil( totalCount/(double)displayRow);
@@ -26,8 +26,8 @@ public class Paging {
 		prev = (beginPage == 1) ? false : true;
 		startNum = (page - 1) * displayRow + 1;
 		endNum = page * displayRow;
-
-	}
+		System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum + " " + totalCount);
+	}	// setTotalCount 메서드의 매개변수에 총게시물 갯수가 입력되면 paging() 메서드도 호출되어서 각 변수값이 계산됩니다.
 	
 	public int getPage() {
 		return page;

@@ -20,8 +20,16 @@ select count(*) from address;
 select * from orders;
 select * from cartList;
 select * from order_detail;
+select * from qna;
+select * from worker;
+select * from order;
 
+select*from product order by pseq desc;
 
+--select * from( 
+select * from ( select rownum as rn, p. * from((select*from product order by pseq desc) p) ) where rn>=11 and rn<=20;
+				
+select rownum as rn, p. * from((select*from product order by pseq desc) p);
 
 ------------------------------------------------ 샘플 데이터 입력------------------------------------
 

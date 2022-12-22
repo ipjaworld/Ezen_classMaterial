@@ -26,11 +26,16 @@
 
 
 <div id="paging" style="margin-left:300px; font-size:120%; font-weight:bold">
+	<!-- 페이지를 클릭했을 때 이동할 url을 변수에 저장 -->
 	<c:url var="action" value="shop.do?command=qnaList" />
+	
+	<!-- 리퀘스트로 전달된 paging 객체값들을 이동 -->
+	<!-- 이전 버튼 표시 -->
 		<c:if test="${paging.prev}" >
 			<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;
 		</c:if>
 
+		<!-- 이동할 페이지들 표시 begin 부터end까지 -->
 		<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
 			<c:choose>
 				<c:when test="${index==paging.page}">

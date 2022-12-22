@@ -59,7 +59,21 @@ function go_order_insert(){
 
 
 
-
+function withdrawalConfirm(){
+	// 정말로 탈퇴할건지 물어보고
+	// 탈퇴가 결정되면 계정을 삭제하는게 아니라 useyn을 'N' 으로 바꿔서 탈퇴시키고
+	// 로그아웃하고
+	// loginForm 으로 이동해주세요
+	var result = confirm("정말로 탈퇴를 원하시나요??");
+	if(result){
+		location.href = "shop.do?command=withdrawalUser"
+		/*document.formm.action = "shop.do?command=withdrawalUser";
+		document.formm.submit();*/
+	}else{
+		alert("회원 탈퇴가 취소되었습니다.");
+	}
+	
+}
 
 
 
