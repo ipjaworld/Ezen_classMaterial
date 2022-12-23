@@ -24,10 +24,14 @@
 					<td><fmt:formatNumber type="currency" value="${orderVO.price2*orderVO.quantity}"/></td>
 					<td>
 						<c:choose>
-							<c:when test='${orderVO.result=="1" }'>진행중</c:when>
-							<c:otherwise><span style="color:red">처리 완료</span></c:otherwise>
-						</c:choose>
-			
+							<c:when test="${orderVO.result=='1' }">결제완료</c:when>
+							<c:when test="${orderVO.result=='2' }">배송중</c:when>
+							<c:when test="${orderVO.result=='3' }">
+								<span style="color:blue">배송완료</span>
+								<input type="button" value="구매확정" onClick="orderEnd('${orderVO.odseq}');">
+							</c:when>
+							<c:otherwise><span style="color:red">구매 확정</span></c:otherwise>
+						</c:choose></td>
 			</c:forEach>
 		</table>
 		<div class="clear"></div>

@@ -10,29 +10,24 @@ import javax.servlet.http.HttpSession;
 
 import com.ezenac.shop.controller.action.Action;
 import com.ezenac.shop.dao.AdminDao;
-import com.ezenac.shop.dto.ProductVO;
-import com.ezenac.shop.dto.QnaVO;
+import com.ezenac.shop.dto.MemberVO;
 import com.ezenac.shop.util.Paging;
 
-public class AdminProductListAction implements Action {
+public class AdminMemberListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String url = "admin/product/productList.jsp";
+		String url ="admin/member/memberList.jsp";
 		
 		HttpSession session = request.getSession();
 		String adminId = (String)session.getAttribute("loginAdmin");
 		if( adminId == null)
 			url = "shop.do?command=admin";
 		else {
-			AdminDao adao = AdminDao.getInstance();
-			
 			if(request.getParameter("start")!=null) {
 				session.removeAttribute("page");
 				session.removeAttribute("key");
 			}
-			
 			int page = 1;	
 			if(request.getParameter("page") != null) {	
 				page = Integer.parseInt( request.getParameter("page") );
@@ -50,23 +45,21 @@ public class AdminProductListAction implements Action {
 			}else {
 				session.removeAttribute("key");
 			}
-			
 
-			
 			Paging paging = new Paging();
 			paging.setPage(page);	
-			paging.setDisplayPage(10);
-			paging.setDisplayRow(10);
 			
-			int count = adao.getAllcount("product", "name", key);
+			AdminDao adao = AdminDao.getInstance();
+			int count = adao.getAllcount("member", "name", key);
 			paging.setTotalCount(count);		
 			
-			ArrayList<ProductVO> productList = adao.selectProduct(paging, key);
+			ArrayList<MemberVO> list = adao.selectMember(paging, key);
 			request.setAttribute("paging", paging);
-			request.setAttribute("productList", productList);
-			request.setAttribute("key", key);
+			request.setAttribute("memberList",list);
+			request.setAttribute("key3", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
+			
 	}
 
 }

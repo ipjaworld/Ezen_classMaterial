@@ -127,12 +127,39 @@ function go_total( comm ){
 }
 
 
+function go_order_save(){
+	
+	// 현재 화면에 보여지고 있는 주문들의 체크박스들의 체크된 상태가 몇개나 체크되어 있는지 갯수를 count 합니다
+	var count = 0;
+	if( document.frm.result.length == undefined){ // 화면에 표시된 체크박스가 한개인 경우
+		if( document.frm.result.checked == true) count++;
+	}else{	// 화면에 표시된 체크박스가 두개 이상인 경우
+		for( var i = 0; i<document.frm.result.length; i++){
+			if( document.frm.result[i].checked==true) count++;
+		}
+	}
+	// count 값이 0이면, 더 진행하지 않고 orderList.jsp 로 되돌아갑니다
+	if(count == 0){
+		alert("주문처리할 항목을 선택해주세요.");
+	}else{	// count 값이 1 이상이라면, 현재 폼 안에 있는 체크박스 밸류값들을 갖고, 처리완료로 처리하러 command=AdminOrderSave 로 이동
+		document.frm.action = "shop.do?command=adminOrderSave";
+		document.frm.submit();
+	}
+	// 처리하고(주문의 result 값을 '1' -> '2'로 변경) orderList.jsp 로 되돌아옵니다.
+}
+
+
+function go_view( qseq ){
+	location.href = "shop.do?command=adminQnaDetail&qseq=" + qseq;
+}
 
 
 
-
-
-
+function go_rep(){
+	document.frm.action="shop.do?command=adminQnaRepSave";
+	document.frm.submit();
+	// 답변 글 등록 & rep 필드를 2로 업데이트
+}
 
 
 

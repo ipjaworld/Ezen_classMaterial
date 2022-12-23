@@ -76,6 +76,9 @@ function withdrawalConfirm(){
 }
 
 
+function orderEnd( oseq, odseq ){
+	location.href="shop.do?command=orderEnd&odseq=" + odseq + "&oseq="+oseq;
+}
 
 
 

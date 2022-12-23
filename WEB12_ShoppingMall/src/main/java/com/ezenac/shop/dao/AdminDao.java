@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.ezenac.shop.dto.MemberVO;
 import com.ezenac.shop.dto.OrderVO;
 import com.ezenac.shop.dto.ProductVO;
 import com.ezenac.shop.dto.QnaVO;
@@ -76,7 +77,8 @@ public class AdminDao {
 	public int getAllcount(String tableName, String fieldName, String key) {
 		int count = 0;
 		
-		String sql = "select count(*) as cnt from "+ tableName + " where" + fieldName +  "like '%'||?||'%'";
+		String sql = "select count(*) as cnt from "+ tableName + " where " + fieldName +  " like '%'||?||'%'";
+
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -180,12 +182,12 @@ public class AdminDao {
 
 	public ArrayList<OrderVO> selectOrder(Paging paging, String key) {
 		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
-		String sql = "select * from("
+		String sql = "select * from ( "
 				+ " select * from ( "
-				+ " select rownum as rn, p. * from "
-				+ " ((select*from product where name like '%'||?||'%' order by pseq desc) p)"
-				+ " ) where rn>=?"
-				+ " ) where rn<=?";
+				+ " select rownum as rn, o.* from "
+				+ " ((select * from order_view where mname like '%'||?||'%' order by result, odseq desc) o)"
+				+ " ) where rn >= ?"
+				+ " ) where rn <= ?";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -196,17 +198,19 @@ public class AdminDao {
 			while( rs.next() ) {
 				OrderVO ovo = new OrderVO();
 				
-				ovo.setPseq(rs.getInt("pseq"));
+				ovo.setOdseq(rs.getInt("Odseq"));
+				ovo.setOseq(rs.getInt("Oseq"));
 				ovo.setIndate(rs.getTimestamp("indate"));
 				ovo.setMname(rs.getString("mname"));
-				ovo.setAddress1(sql);
-				ovo.setId(sql);
-				ovo.setPhone(sql);
-				ovo.setPname(sql);
-				ovo.setPrice2(0);
-				ovo.setQuantity(0);
-				ovo.setZip_num(sql);
-				ovo.setResult(sql);
+				ovo.setAddress1(rs.getString("address1"));
+				ovo.setId(rs.getString("id"));
+				ovo.setPseq(rs.getInt("pseq"));
+				ovo.setPhone(rs.getString("phone"));
+				ovo.setPname(rs.getString("pname"));
+				ovo.setPrice2(rs.getInt("price2"));
+				ovo.setQuantity(rs.getInt("quantity"));
+				ovo.setZip_num(rs.getString("zip_num"));
+				ovo.setResult(rs.getString("result"));
 
 				list.add(ovo);
 			}
@@ -216,5 +220,123 @@ public class AdminDao {
 		
 		return list;
 	}
-	
+
+
+	public void updateOrderResult(int odseq) {
+		con = Dbman.getConnection();
+		String sql = "update order_detail set result=result+1 where odseq=?";
+		// 데이터 수정시 view 를 수정하지 않고, view의 원본이 되는 테이블을 수정하는 것이 좋습니다.
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, odseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {  e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		
+	}
+
+
+	public ArrayList<MemberVO> selectMember(Paging paging, String key) {
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		String sql = "select * from ( "
+				+ " select * from ( "
+				+ " select rownum as rn, m.* from "
+				+ " ((select * from member where name like '%'||?||'%' order by indate desc) m)"
+				+ " ) where rn >= ?"
+				+ " ) where rn <= ?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
+			pstmt.setInt(2, paging.getStartNum());
+			pstmt.setInt(3, paging.getEndNum());
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				MemberVO mvo = new MemberVO();
+				
+				mvo.setAddress1(rs.getString("address1"));
+				mvo.setEmail(rs.getString("email"));
+				mvo.setId(rs.getString("id"));
+				mvo.setIndate(rs.getTimestamp("indate"));
+				mvo.setName(rs.getString("name"));
+				mvo.setPhone(rs.getString("phone"));
+				mvo.setPwd(rs.getString("pwd"));
+				mvo.setUseyn(rs.getString("useyn"));
+				mvo.setZip_num(rs.getString("zip_num"));
+				list.add(mvo);
+			}
+		} catch (SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+
+
+	public int getIDAllcount(String key) {
+		int count = 0;
+		
+		String sql = "select count(*) as cnt from qna " 
+				+ " where subject like '%'||?||'%' or content like '%'||?||'%' " ;
+
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
+			pstmt.setString(2, key);
+			rs = pstmt.executeQuery();
+			if( rs.next() ) count = rs.getInt("cnt");
+		} catch(SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs);
+		}
+		
+		return count;
+	}
+
+
+	public ArrayList<QnaVO> selectQna(Paging paging, String key) {
+		ArrayList<QnaVO> list = new ArrayList<QnaVO>();
+		String sql = "select * from ( "
+				+ " select * from ( "
+				+ " select rownum as rn, q.* from "
+				+ " ((select * from qna where subject like '%'||?||'%' or content like '%'||?||'%' order by qseq desc) q)"
+				+ " ) where rn >= ?"
+				+ " ) where rn <= ?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
+			pstmt.setString(2, key);
+			pstmt.setInt(3, paging.getStartNum());
+			pstmt.setInt(4, paging.getEndNum());
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				QnaVO qvo = new QnaVO();
+				qvo.setSubject(rs.getString("subject"));
+				qvo.setContent(rs.getString("content"));
+				qvo.setId(rs.getString("id"));
+				qvo.setIndate(rs.getTimestamp("indate"));
+				qvo.setRep(rs.getString("rep"));
+				qvo.setReply(rs.getString("reply"));
+				qvo.setQseq(rs.getInt("qseq"));
+				list.add(qvo);
+			}
+		} catch (SQLException e) {e.printStackTrace();
+		}finally { Dbman.close(con, pstmt, rs); }
+		return list;
+	}
+
+
+	public void updateQna(String qnaReply, int qseq) {
+		con = Dbman.getConnection();
+		String sql = "update qna set reply=?, rep='2' where qseq=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qnaReply);
+			pstmt.setInt(2, qseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {  e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs);
+		}
+	}
 }

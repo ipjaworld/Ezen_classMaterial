@@ -99,9 +99,11 @@ public class OrderDao {
 
 	public ArrayList<Integer> selectOseqOrderIng(String id) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		
+		/**
 		String sql="select distinct oseq from order_view "
-				+ " where id=? and result='1' order by oseq desc";
+				+ " where id=? and result='1' order by oseq desc";*/
+		String sql="select distinct oseq from order_view "
+				+ " where id=? order by oseq desc";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -133,6 +135,11 @@ public class OrderDao {
 		}finally {Dbman.close(con, pstmt, rs);}
 	
 		return list;
+	}
+
+	public void updateOrderEnd(int odseq) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

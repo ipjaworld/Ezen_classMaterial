@@ -26,6 +26,13 @@ public class AdminOrderListAction implements Action {
 			url = "shop.do?command=admin";
 		else {
 			AdminDao adao = AdminDao.getInstance();
+			
+			if(request.getParameter("start")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			
+			
 			int page = 1;	
 			if(request.getParameter("page") != null) {	
 				page = Integer.parseInt( request.getParameter("page") );
@@ -51,7 +58,7 @@ public class AdminOrderListAction implements Action {
 			paging.setDisplayPage(10);
 			paging.setDisplayRow(10);
 			
-			int count = adao.getAllcount("order_view", "pname", key);
+			int count = adao.getAllcount("order_view", "mname", key);
 			paging.setTotalCount(count);		
 			
 			ArrayList<OrderVO> orderList = adao.selectOrder(paging, key);

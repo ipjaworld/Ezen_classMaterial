@@ -61,12 +61,18 @@ public class MypageAction implements Action {
 				OrderVO ovo = orderListByOseq.get(0);
 				
 				// 꺼낸 상품의 이름을 현재 상품 이름 포함 X건"으로 수정합니다
-				ovo.setPname( ovo.getPname() + "포함" + orderListByOseq.size() +"전") ;
+				ovo.setPname( ovo.getPname() + "포함" + orderListByOseq.size() +"건") ;
+				ovo.setResult("4");	// 대표상품의 결과를 "구매확정"으로 설정
 				
 				// 결제한 총금액을 계산한 후
 				int totalPrice = 0;
-				for( OrderVO ovo1 : orderListByOseq)
+				for( OrderVO ovo1 : orderListByOseq ) {
 					totalPrice+=ovo1.getPrice2()*ovo1.getQuantity();
+					if( !ovo1.getResult().equals("4"))
+						ovo.setResult( ovo1.getResult() );
+					System.out.println( ovo1.getResult());
+					// 주문에 포함된 제품의 결과를 하나씩 조회해서 4가 아니면 대표상품의 결과를 현재 상품의 결과값으로
+				}
 				
 				//  ovo 객체의 price 를 앞에서 게산한 총금액으로 수정합니다
 				ovo.setPrice2(totalPrice);

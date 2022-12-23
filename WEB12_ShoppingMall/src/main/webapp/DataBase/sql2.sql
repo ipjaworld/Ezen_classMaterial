@@ -22,7 +22,7 @@ select * from cartList;
 select * from order_detail;
 select * from qna;
 select * from worker;
-select * from order;
+select * from orders;
 
 select*from product order by pseq desc;
 
@@ -183,11 +183,16 @@ update product set bestyn='N' where pseq IN(2,4,6,8,10);
 update product set bestyn='N' where pseq IN(12,14);
 
 update order_detail set result='2' where oseq=21;
+
+update order_detail set result='3' where oseq=24;
+update order_detail set result='3' where oseq=25;
+update order_detail set result='2' where oseq=26;
+update order_detail set result='4' where oseq=27;
 select * from order_detail;
 
 commit
 
-
+select count(*) as cnt from qna where id = 'one';
 
 
 
