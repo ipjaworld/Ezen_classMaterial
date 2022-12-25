@@ -65,9 +65,7 @@ where sal > any(select sal from emp where job='SALESMAN') 	and   job<>'SALESMAN'
 
 select * from emp;
 
-
-
-
+select * from rentlist
 
 
 

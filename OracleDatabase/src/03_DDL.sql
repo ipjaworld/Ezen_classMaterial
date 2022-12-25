@@ -47,6 +47,15 @@ create table booklist(
 	-- primary key( booknum ) : 기본키로 booknum 을 지정하겠다는 뜻입니다
 );
 
+create table booklist(
+	booknum varchar2(5) not null ,   --  not null 필드에 입력되는 값이 null 일 수 업는 제약조건
+	subject varchar2(30) not null,
+	makeyear number(4) ,
+	inprice number(6) ,
+	outprice number(4),
+	constraint bl_pk primary key( booknum )
+);
+
 drop table booklist;
 
 select * from booklist;
@@ -129,7 +138,7 @@ drop table rentlist purge;
 select * from rentlist;
 
 
-
+commit
 
 
 
