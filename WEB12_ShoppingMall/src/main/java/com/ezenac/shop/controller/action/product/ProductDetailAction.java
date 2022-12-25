@@ -22,7 +22,6 @@ public class ProductDetailAction implements Action {
 		ProductVO pvo = pdao.getProduct( pseq );
 		
 		request.setAttribute("productVO", pvo);
-
 		request.getRequestDispatcher("product/productDetail.jsp").forward(request, response);
 	}
 

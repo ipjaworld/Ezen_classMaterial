@@ -118,5 +118,16 @@ public class MemberDao {
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
 	}
+
+	public void withDrawUser(String id) {
+		String sql = "Update member set useyn='N' where id = ?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id );
+			pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+	}
 	
 }
